@@ -86,7 +86,10 @@ const Login = () => {
           ""
         )}
         {signUp ? (
-          <button className=" bg-yellow-500 p-2 rounded-lg font-semibold text-white my-2">
+          <button
+            className=" bg-yellow-500 p-2 rounded-lg font-semibold text-white my-2"
+            onClick={handleButtonClick}
+          >
             Sign Up
           </button>
         ) : (

@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.cf039f0c.css",
+    "main.js": "/static/js/main.79d64fec.js",
+    "static/media/login-bg.jpg": "/static/media/login-bg.af1549fc7d5b3ebc6239.jpg",
+    "static/media/Cinebility-Block.svg": "/static/media/Cinebility-Block.f85b536519eb594237bb86eeaa30fb44.svg",
+    "index.html": "/index.html",
+    "main.cf039f0c.css.map": "/static/css/main.cf039f0c.css.map",
+    "main.79d64fec.js.map": "/static/js/main.79d64fec.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cf039f0c.css",
+    "static/js/main.79d64fec.js"
+  ]
+}
