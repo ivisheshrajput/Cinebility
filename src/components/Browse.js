@@ -1,7 +1,7 @@
 import React from "react";
 
 const Browse = () => {
-  return <div>Browsgbghdhbdrgnsnrte</div>;
+  return <div>Browse</div>;
 };
 
 export default Browse;
