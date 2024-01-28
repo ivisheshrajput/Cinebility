@@ -5,6 +5,7 @@ import { checkValidation } from "../utils/checkValidation";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
@@ -15,28 +16,31 @@ const Login = () => {
 
   //In the below code I have commented out useRef things from every where because when i am using useRef I am not able to change the fields to blank of email and password when switched to signUp or from sign up to sign in automatically although using useRef is easy
 
-  //   const email = useRef(null);
-  //   const password = useRef(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const email = useRef(null);
+  const password = useRef(null);
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  const displayName = useRef(null);
 
   const [errMessage, setErrMessage] = useState("");
   const handleClick = () => {
     setSignUp(!signUp);
     setErrMessage("");
-    setEmail("");
-    setPassword("");
+    // setEmail("");
+    // setPassword("");
+    email.current.value = ""; // clear email
+    password.current.value = ""; // clear password
+    displayName.current.value = ""; // clear displayName
   };
   const handleButtonClick = () => {
-    // const message = checkValidation(
-    //   email.current.value,
-    //   password.current.value
-    // );
-    // console.log(email.current.value)
-    // console.log(password.current.value)
-    // setErrMessage(message);
+    const message = checkValidation(
+      email.current.value,
+      password.current.value
+    );
+    console.log(email.current.value);
+    console.log(password.current.value);
 
-    const message = checkValidation(email, password);
+    // const message = checkValidation(email, password);
     // console.log(email);
     // console.log(password);
     setErrMessage(message);
@@ -46,7 +50,11 @@ const Login = () => {
 
     if (!signUp) {
       //sign in logic
-      signInWithEmailAndPassword(auth, email, password)
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
@@ -63,8 +71,12 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
+          updateProfile(user, {
+            displayName: { displayName },
+            photoURL: "https://example.com/jane-q-user/profile.jpg",
+          });
           navigate("/browse");
-
+          console.log(user, "dhgrsghsf");
           // ...
         })
         .catch((error) => {
@@ -77,7 +89,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <>
       <Header />
       <img src={BGImage} alt="" className="h-screen w-screen  absolute" />
       //{" "}
@@ -95,6 +107,7 @@ const Login = () => {
         {signUp ? (
           <input
             placeholder="Username"
+            ref={displayName}
             type="username"
             className="p-2 rounded-lg my-2"
           ></input>
@@ -103,17 +116,13 @@ const Login = () => {
         )}
         <input
           placeholder="Email"
-          //   ref={email}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          ref={email}
           type="email"
           className="p-2 rounded-lg my-2"
         ></input>
         <input
           placeholder="Password"
-          //   ref={password}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          ref={password}
           type="password"
           className="p-2 rounded-lg my-2"
         ></input>
@@ -161,7 +170,7 @@ const Login = () => {
           </p>
         )}
       </form>
-    </div>
+    </>
   );
 };
 
