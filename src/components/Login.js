@@ -9,8 +9,11 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [signUp, setSignUp] = useState(false);
   const navigate = useNavigate();
 
@@ -21,6 +24,7 @@ const Login = () => {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
   const displayName = useRef(null);
+  const phoneNumber = useRef(null);
 
   const [errMessage, setErrMessage] = useState("");
   const handleClick = () => {
@@ -28,14 +32,14 @@ const Login = () => {
     setErrMessage("");
     // setEmail("");
     // setPassword("");
-    email.current.value = ""; // clear email
-    password.current.value = ""; // clear password
-    displayName.current.value = ""; // clear displayName
+    // email.current.value = ""; // clear email
+    // password.current.value = ""; // clear password
+    // displayName.current.value = ""; // clear displayName
   };
   const handleButtonClick = () => {
     const message = checkValidation(
-      email.current.value,
-      password.current.value
+      email.current?.value,
+      password.current?.value
     );
     console.log(email.current.value);
     console.log(password.current.value);
@@ -67,16 +71,42 @@ const Login = () => {
           setErrMessage(errorCode + " " + errorMessage);
         });
     } else {
-      createUserWithEmailAndPassword(auth, email, password)
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
           updateProfile(user, {
-            displayName: { displayName },
-            photoURL: "https://example.com/jane-q-user/profile.jpg",
-          });
-          navigate("/browse");
-          console.log(user, "dhgrsghsf");
+            displayName: displayName.current?.value,
+            phoneNumber: phoneNumber.current?.value,
+            photoURL: "https://avatars.githubusercontent.com/u/156611608?v=4 ",
+          })
+            .then(() => {
+              // Profile updated!
+              // ...
+              const { uid, email, displayName, phoneNumber, photoURL } =
+                auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  phoneNumber: phoneNumber,
+                  photoURL: photoURL,
+                })
+              );
+              navigate("/browse");
+              console.log(user, "dhgrsghsf");
+            })
+            .catch((error) => {
+              // An error occurred
+              // ...
+              setErrMessage(error.message);
+            });
+
           // ...
         })
         .catch((error) => {
@@ -129,6 +159,7 @@ const Login = () => {
         {signUp ? (
           <input
             placeholder="Phone Number"
+            ref={phoneNumber}
             type="phone"
             className="p-2 rounded-lg my-2"
           ></input>
