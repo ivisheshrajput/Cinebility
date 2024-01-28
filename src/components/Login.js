@@ -7,9 +7,11 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [signUp, setSignUp] = useState(false);
+  const navigate = useNavigate();
 
   //In the below code I have commented out useRef things from every where because when i am using useRef I am not able to change the fields to blank of email and password when switched to signUp or from sign up to sign in automatically although using useRef is easy
 
@@ -49,6 +51,7 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           // ...
+          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -60,6 +63,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
+          navigate("/browse");
 
           // ...
         })
