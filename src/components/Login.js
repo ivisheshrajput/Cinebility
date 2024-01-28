@@ -2,6 +2,11 @@ import React, { useRef, useState } from "react";
 import Header from "./Header";
 import BGImage from "../../src/assets/login-bg.jpg";
 import { checkValidation } from "../utils/checkValidation";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
   const [signUp, setSignUp] = useState(false);
@@ -33,6 +38,38 @@ const Login = () => {
     // console.log(email);
     // console.log(password);
     setErrMessage(message);
+    if (message) return;
+
+    //sign in and sign up logic
+
+    if (!signUp) {
+      //sign in logic
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrMessage(errorCode + " " + errorMessage);
+        });
+    } else {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrMessage(errorCode + " " + errorMessage);
+          // ..
+        });
+    }
   };
 
   return (
@@ -43,7 +80,7 @@ const Login = () => {
       <form
         onSubmit={(e) => e.preventDefault()}
         className={`relative z-10 w-[400px]  ${
-          signUp ? "h-[460px]" : "h-[360px]"
+          signUp ? "h-[480px]" : "h-[370px]"
         } flex flex-col mx-auto  bg-black    rounded-2xl  my-36  shadow-lg   p-9 opacity-95  `}
       >
         {signUp ? (
