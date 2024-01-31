@@ -82,7 +82,8 @@ const Login = () => {
           updateProfile(user, {
             displayName: displayName.current?.value,
             phoneNumber: phoneNumber.current?.value,
-            photoURL: "https://avatars.githubusercontent.com/u/156611608?v=4 ",
+            photoURL:
+              "https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg",
           })
             .then(() => {
               // Profile updated!
