@@ -8,12 +8,11 @@ const MainContainer = () => {
   //we did this because if the movies data didnt come it will still render
   if (!movies) return;
   const mainMovies = movies[0];
-  console.log(mainMovies, "hgghgghjbjbjj");
-  const { original_title, overview } = mainMovies;
+  const { original_title, overview, id } = mainMovies;
   return (
     <div>
       <VideoTitle title={original_title} overview={overview} />
-      <VideoBackground />
+      <VideoBackground movieID={id}/>
     </div>
   );
 };
