@@ -5,7 +5,9 @@ import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  //due to this it re render twice abd because of that title and video gets diierent
+
+  // <React.StrictMode>
+  <App />
+  // </React.StrictMode>
 );

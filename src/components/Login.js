@@ -169,14 +169,14 @@ const Login = () => {
         )}
         {signUp ? (
           <button
-            className=" bg-yellow-500 p-2 rounded-lg font-semibold text-white my-2"
+            className=" bg-customColorBase  p-2 rounded-lg font-semibold text-white my-2"
             onClick={handleButtonClick}
           >
             Sign Up
           </button>
         ) : (
           <button
-            className=" bg-yellow-500 p-2 rounded-lg font-semibold text-white my-2"
+            className=" bg-customColorBase  p-2 rounded-lg font-semibold text-white my-2"
             onClick={handleButtonClick}
           >
             Sign In
@@ -185,7 +185,7 @@ const Login = () => {
         <p className="text-red-500  ">{errMessage}</p>
 
         {signUp ? (
-          <p className="text-yellow-500 text-sm mt-2 ">
+          <p className="text-customColorBase  text-sm mt-2 ">
             Already Have a account? <br />
             <u className="cursor-pointer " onClick={handleClick}>
               Sign In
@@ -193,7 +193,7 @@ const Login = () => {
             from here
           </p>
         ) : (
-          <p className="text-yellow-500 text-sm mt-2 ">
+          <p className="text-customColorBase  text-sm mt-2 ">
             Don't have account? <br />
             <u className="cursor-pointer " onClick={handleClick}>
               Sign Up
