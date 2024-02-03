@@ -62,14 +62,14 @@ const Header = () => {
             <img
               src={user?.photoURL}
               alt="user image"
-              className="w-12 rounded-full shadow-md border border-yellow-500 "
+              className="w-12 rounded-full shadow-md border border-customColorBase  "
             />
           </span>
           <span>
             {" "}
             <button
               onClick={handleSignOut}
-              className="border border-yellow-500 bg-yellow-500 mt-2 font-semibold p-1 px-2 hover:bg-yellow-400 rounded-md text-white"
+              className="border border-customColorBase  bg-customColorBase  mt-2 font-semibold p-1 px-2 hover:bg-customColorDark  rounded-md text-white"
             >
               Logout
             </button>
