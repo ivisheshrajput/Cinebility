@@ -5,6 +5,7 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
+import { removeAllMovies } from "../utils/moviesSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const Header = () => {
       } else {
         // User is signed out
         dispatch(removeUser());
+        dispatch(removeAllMovies());
         navigate("/");
       }
     });
