@@ -56,9 +56,22 @@ const Header = () => {
         {" "}
         <img src={NameLogo} alt="" className="w-52  " />
       </div>
+
       {user && (
         <div className="space-x-5 mr-4 flex">
-          {" "}
+          <button className="text-customColorBase ">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-chatgpt"
+              viewBox="0 0 16 16"
+            >
+              {/* Your custom ChatGPT icon SVG path goes here */}
+            </svg>{" "}
+            GPT Search
+          </button>{" "}
           <span>
             {" "}
             <img
