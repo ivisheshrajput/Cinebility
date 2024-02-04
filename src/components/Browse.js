@@ -3,14 +3,22 @@ import Header from "./Header";
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
 import GptSearch from "./GptSearch";
+import { useSelector } from "react-redux";
 
 const Browse = () => {
+  const gptSearch = useSelector((store) => store.gpt.showGptSearch);
   return (
     <div>
       <Header />
-      <GptSearch />
-      <MainContainer />
-      <SecondaryContainer />
+      {gptSearch ? (
+        <GptSearch />
+      ) : (
+        <>
+          {" "}
+          <MainContainer />
+          <SecondaryContainer />
+        </>
+      )}
     </div>
   );
 };

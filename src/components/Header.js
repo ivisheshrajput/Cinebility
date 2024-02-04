@@ -6,12 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { removeAllMovies } from "../utils/moviesSlice";
+import { FaRobot, FaHome } from "react-icons/fa";
+import { toggleGptSearchView } from "../utils/gptSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
-
+  const gptButton = useSelector((store) => store.gpt.showGptSearch);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -50,6 +52,11 @@ const Header = () => {
         navigate("/error ");
       });
   };
+
+  const handleGptToggle = () => {
+    dispatch(toggleGptSearchView());
+  };
+
   return (
     <div className="fixed z-50 p-5 flex justify-between w-screen bg-gradient-to-b from-black    ">
       <div>
@@ -58,20 +65,33 @@ const Header = () => {
       </div>
 
       {user && (
-        <div className="space-x-5 mr-4 flex">
-          <button className="text-customColorBase ">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-chatgpt"
-              viewBox="0 0 16 16"
-            >
-              {/* Your custom ChatGPT icon SVG path goes here */}
-            </svg>{" "}
-            GPT Search
-          </button>{" "}
+        <div className="space-x-5 mr-4 flex items-center">
+          {gptButton ? (
+            <span className="">
+              {" "}
+              <button
+                className="text-customColorBase bg-black bg-opacity-70  flex border border-customColorBase p-1 rounded-md"
+                onClick={handleGptToggle}
+              >
+                {" "}
+                <FaHome className="text-customColorBase text-xl mr-1 " />
+                Homepage
+              </button>{" "}
+            </span>
+          ) : (
+            <span>
+              {" "}
+              <button
+                className="text-customColorBase flex border border-customColorBase p-1 rounded-md"
+                onClick={handleGptToggle}
+              >
+                {" "}
+                <FaRobot className="text-customColorBase text-xl mr-1 " />
+                GPT Search
+              </button>{" "}
+            </span>
+          )}
+
           <span>
             {" "}
             <img
