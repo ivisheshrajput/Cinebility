@@ -8,6 +8,8 @@ import { addUser, removeUser } from "../utils/userSlice";
 import { removeAllMovies } from "../utils/moviesSlice";
 import { FaRobot, FaHome } from "react-icons/fa";
 import { toggleGptSearchView } from "../utils/gptSlice";
+import { SUPPORTED_LANGUAGE } from "../utils/constants";
+import { changeLanguage } from "../utils/languageSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -56,7 +58,9 @@ const Header = () => {
   const handleGptToggle = () => {
     dispatch(toggleGptSearchView());
   };
-
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
+  };
   return (
     <div className="fixed z-50 p-5 flex justify-between w-screen bg-gradient-to-b from-black    ">
       <div>
@@ -67,8 +71,17 @@ const Header = () => {
       {user && (
         <div className="space-x-5 mr-4 flex items-center">
           {gptButton ? (
-            <span className="">
-              {" "}
+            <span className="flex space-x-3">
+              <select
+                className="rounded-md bg-gray-400  text-white font-semibold px-2 "
+                onChange={handleLanguageChange}
+              >
+                {SUPPORTED_LANGUAGE.map((lang, index) => (
+                  <option key={index} value={lang.identifier}>
+                    {lang.name}
+                  </option>
+                ))}
+              </select>{" "}
               <button
                 className="text-customColorBase bg-black bg-opacity-70  flex border border-customColorBase p-1 rounded-md"
                 onClick={handleGptToggle}
@@ -80,7 +93,6 @@ const Header = () => {
             </span>
           ) : (
             <span>
-              {" "}
               <button
                 className="text-customColorBase flex border border-customColorBase p-1 rounded-md"
                 onClick={handleGptToggle}
