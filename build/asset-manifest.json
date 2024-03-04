@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/static/css/main.727e7990.css",
-    "main.js": "/static/js/main.df956b6b.js",
+    "main.js": "/static/js/main.e1332f27.js",
     "static/media/login-bg.jpg": "/static/media/login-bg.af1549fc7d5b3ebc6239.jpg",
     "static/media/Cinebility-Block.svg": "/static/media/Cinebility-Block.f85b536519eb594237bb86eeaa30fb44.svg",
     "index.html": "/index.html",
     "main.727e7990.css.map": "/static/css/main.727e7990.css.map",
-    "main.df956b6b.js.map": "/static/js/main.df956b6b.js.map"
+    "main.e1332f27.js.map": "/static/js/main.e1332f27.js.map"
   },
   "entrypoints": [
     "static/css/main.727e7990.css",
-    "static/js/main.df956b6b.js"
+    "static/js/main.e1332f27.js"
   ]
 }
